@@ -1,5 +1,4 @@
 import React from 'react'
-import './index.css'
 
 type Config = {
   timestamps?: number | string
@@ -67,6 +66,12 @@ const LoomPlayer = ({ ...iframe_props }: LoomPlayerProps) => {
       <iframe
         {...iframe_props}
         src={src}
+        style={{
+          border: 'none',
+          width: 960,
+          height: 540,
+          ...iframe_props.style
+        }}
         className='react-loom-player'
         allowFullScreen
       ></iframe>

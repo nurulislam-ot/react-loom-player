@@ -18,7 +18,6 @@
     "rollup": "^4.18.0",
     "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-dts": "^6.1.1",
-    "rollup-plugin-import-css": "^3.5.0",
     "tslib": "^2.6.3",
     "typescript": "^5.4.5"
   }

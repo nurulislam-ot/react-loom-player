@@ -1,7 +1,6 @@
 import dts from 'rollup-plugin-dts'
 import del from 'rollup-plugin-delete'
 import terser from '@rollup/plugin-terser'
-import css from "rollup-plugin-import-css";
 import typescript from '@rollup/plugin-typescript'
 
 export default [
@@ -13,7 +12,7 @@ export default [
         format: 'esm'
       }
     ],
-    plugins: [typescript(), terser(), css()],
+    plugins: [typescript(), terser()],
     external: ['react']
   },
   {
@@ -24,7 +23,6 @@ export default [
         format: 'esm'
       }
     ],
-    external: [/\.css$/],
     plugins: [
       typescript(),
       dts(),
