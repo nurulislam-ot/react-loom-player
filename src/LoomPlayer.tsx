@@ -67,6 +67,7 @@ const LoomPlayer = ({ ...iframe_props }: LoomPlayerProps) => {
         {...iframe_props}
         src={src}
         style={{
+          display: iframe_props.src ? 'initial' : 'none',
           border: 'none',
           width: 960,
           height: 540,
