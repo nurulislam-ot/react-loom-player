@@ -98,23 +98,8 @@ To style the Loom player, you can use the following CSS classes:
 Here is an example of how you can style the player:
 
 ```css
-.react-loom-player-wrapper {
-  position: relative;
-  padding-bottom: 56.25%;
-  height: 0;
-  overflow: hidden;
-  max-width: 100%;
-  background: #000;
-}
-
-.react-loom-player {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
+.react-loom-player-wrapper {}
+.react-loom-player {}
 ```
 
 ## Contributing
