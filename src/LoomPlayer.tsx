@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react"
 
 type Config = {
   timestamps?: number | string
@@ -19,41 +19,44 @@ const generate_loom_url = (url?: string, config?: Config) => {
     return null
   }
 
-  if (!url.startsWith('https://www.loom.com/embed/') && !(url.startsWith('https://www.loom.com/share/')) {
+  if (
+    !url.startsWith("https://www.loom.com/embed/") &&
+    !url.startsWith("https://www.loom.com/share/")
+  ) {
     return null
   }
 
   url = url.replace(
-    'https://www.loom.com/share/',
-    'https://www.loom.com/embed/'
+    "https://www.loom.com/share/",
+    "https://www.loom.com/embed/"
   )
   if (config?.autoplay) {
-    options.push('autoplay=true')
+    options.push("autoplay=true")
   }
   if (config?.timestamps) {
-    if (typeof config.timestamps === 'number') {
+    if (typeof config.timestamps === "number") {
       options.push(`t=${encodeURIComponent(config.timestamps)}s`)
     } else {
       options.push(`t=${encodeURIComponent(config.timestamps)}`)
     }
   }
   if (config?.muted) {
-    options.push('muted=true')
+    options.push("muted=true")
   }
   if (config?.hideEmbedTopBar) {
-    options.push('hideEmbedTopBar=true')
+    options.push("hideEmbedTopBar=true")
   }
   if (config?.hideTitle) {
-    options.push('hide_title=true')
+    options.push("hide_title=true")
   }
   if (config?.hideOwner) {
-    options.push('hide_owner=true')
+    options.push("hide_owner=true")
   }
   if (config?.hideShare) {
-    options.push('hide_share=true')
+    options.push("hide_share=true")
   }
 
-  return `${url.split('?')[0]}?${options.join('&')}`
+  return `${url.split("?")[0]}?${options.join("&")}`
 }
 
 const LoomPlayer = ({ ...iframe_props }: LoomPlayerProps) => {
@@ -64,7 +67,7 @@ const LoomPlayer = ({ ...iframe_props }: LoomPlayerProps) => {
     hideEmbedTopBar: iframe_props.hideEmbedTopBar,
     hideTitle: iframe_props.hideTitle,
     hideOwner: iframe_props.hideOwner,
-    hideShare: iframe_props.hideShare
+    hideShare: iframe_props.hideShare,
   })
 
   return (
@@ -73,12 +76,12 @@ const LoomPlayer = ({ ...iframe_props }: LoomPlayerProps) => {
         <iframe
           {...iframe_props}
           src={src}
-          sandbox="allow-scripts allow-same-origin"
+          sandbox='allow-scripts allow-same-origin'
           style={{
-            border: 'none',
+            border: "none",
             width: 960,
             height: 540,
-            ...iframe_props.style
+            ...iframe_props.style,
           }}
           className='react-loom-player'
           allowFullScreen
