@@ -15,39 +15,45 @@ type LoomPlayerProps = React.IframeHTMLAttributes<HTMLIFrameElement> & Config
 const generate_loom_url = (url?: string, config?: Config) => {
   const options = []
 
-  if (url) {
-    url = url.replace(
-      'https://www.loom.com/share/',
-      'https://www.loom.com/embed/'
-    )
-    if (config?.autoplay) {
-      options.push('autoplay=true')
-    }
-    if (config?.timestamps) {
-      if (typeof config.timestamps === 'number') {
-        options.push(`t=${config.timestamps}s`)
-      } else {
-        options.push(`t=${config.timestamps}`)
-      }
-    }
-    if (config?.muted) {
-      options.push('muted=true')
-    }
-    if (config?.hideEmbedTopBar) {
-      options.push('hideEmbedTopBar=true')
-    }
-    if (config?.hideTitle) {
-      options.push('hide_title=true')
-    }
-    if (config?.hideOwner) {
-      options.push('hide_owner=true')
-    }
-    if (config?.hideShare) {
-      options.push('hide_share=true')
-    }
+  if (!url) {
+    return null
   }
 
-  return `${url?.split('?')[0]}?${options.join('&')}`
+  if (!url.startsWith('https://www.loom.com/embed/') && !(url.startsWith('https://www.loom.com/share/')) {
+    return null
+  }
+
+  url = url.replace(
+    'https://www.loom.com/share/',
+    'https://www.loom.com/embed/'
+  )
+  if (config?.autoplay) {
+    options.push('autoplay=true')
+  }
+  if (config?.timestamps) {
+    if (typeof config.timestamps === 'number') {
+      options.push(`t=${encodeURIComponent(config.timestamps)}s`)
+    } else {
+      options.push(`t=${encodeURIComponent(config.timestamps)}`)
+    }
+  }
+  if (config?.muted) {
+    options.push('muted=true')
+  }
+  if (config?.hideEmbedTopBar) {
+    options.push('hideEmbedTopBar=true')
+  }
+  if (config?.hideTitle) {
+    options.push('hide_title=true')
+  }
+  if (config?.hideOwner) {
+    options.push('hide_owner=true')
+  }
+  if (config?.hideShare) {
+    options.push('hide_share=true')
+  }
+
+  return `${url.split('?')[0]}?${options.join('&')}`
 }
 
 const LoomPlayer = ({ ...iframe_props }: LoomPlayerProps) => {
@@ -63,10 +69,11 @@ const LoomPlayer = ({ ...iframe_props }: LoomPlayerProps) => {
 
   return (
     <div className='react-loom-player-wrapper'>
-      {iframe_props.src ? (
+      {src ? (
         <iframe
           {...iframe_props}
           src={src}
+          sandbox="allow-scripts allow-same-origin"
           style={{
             border: 'none',
             width: 960,
